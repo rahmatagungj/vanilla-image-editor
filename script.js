@@ -20,7 +20,7 @@ function loadImage() {
     previewImg.addEventListener("load", () => {
         disableEditor = false;
         resetFilterBtn.click();
-        imageName = file.name.replace(/^.*[\\\/]/, '');
+        imageName = file.name.replace(/\.[^/.]+$/, "");
         document.querySelector(".container").classList.remove("disable");
     });
 }
