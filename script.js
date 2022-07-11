@@ -1,19 +1,19 @@
 const fileInput = document.querySelector(".file-input"),
-filterOptions = document.querySelectorAll(".filter button"),
-filterName = document.querySelector(".filter-info .name"),
-filterValue = document.querySelector(".filter-info .value"),
-filterSlider = document.querySelector(".slider input"),
-rotateOptions = document.querySelectorAll(".rotate button"),
-previewImg = document.querySelector(".preview-img img"),
-resetFilterBtn = document.querySelector(".reset-filter"),
-chooseImgBtn = document.querySelector(".choose-img"),
-saveImgBtn = document.querySelector(".save-img");
+      filterOptions = document.querySelectorAll(".filter button"),
+      filterName = document.querySelector(".filter-info .name"),
+      filterValue = document.querySelector(".filter-info .value"),
+      filterSlider = document.querySelector(".slider input"),
+      rotateOptions = document.querySelectorAll(".rotate button"),
+      previewImg = document.querySelector(".preview-img img"),
+      resetFilterBtn = document.querySelector(".reset-filter"),
+      chooseImgBtn = document.querySelector(".choose-img"),
+      saveImgBtn = document.querySelector(".save-img");
 
 let imageName, disableEditor = true;
 let brightness = "100", saturation = "100", inversion = "0", grayscale = "0";
 let rotate = 0, flipHorizontal = 1, flipVertical = 1;
 
-const loadImage = () => {
+function loadImage() {
     let file = fileInput.files[0];
     if(!file) return;
     previewImg.src = URL.createObjectURL(file);
@@ -25,7 +25,7 @@ const loadImage = () => {
     });
 }
 
-const applyFilter = () => {
+function applyFilter() {
     if(disableEditor) return;
     previewImg.style.transform = `rotate(${rotate}deg) scale(${flipHorizontal}, ${flipVertical})`;
     previewImg.style.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
@@ -58,7 +58,7 @@ filterOptions.forEach(option => {
     });
 });
 
-const updateFilter = () => {
+function updateFilter() {
     if(disableEditor) return;
     filterValue.innerText = `${filterSlider.value}%`;
     const selectedFilter = document.querySelector(".filter .active");
@@ -91,7 +91,7 @@ rotateOptions.forEach(option => {
     });
 });
 
-const resetFilter = () => {
+function resetFilter() {
     if(disableEditor) return;
     brightness = "100"; saturation = "100"; inversion = "0"; grayscale = "0";
     rotate = 0; flipHorizontal = 1; flipVertical = 1;
@@ -99,7 +99,7 @@ const resetFilter = () => {
     applyFilter();
 }
 
-const saveImage = () => {
+function saveImage() {
     if(disableEditor) return;
     saveImgBtn.innerText = "Saving image...";
     saveImgBtn.classList.add("disable");
